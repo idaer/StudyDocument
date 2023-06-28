@@ -10,7 +10,7 @@
 
 工程文件结构
 
-```
+```java
 -src
     -main
         -java

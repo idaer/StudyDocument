@@ -1,10 +1,20 @@
 # Git
 
+## 零.速查内容
+
+### 从本地上传到云端流程
+
+1. **git add \-\-all**将文件合并到（本地）暂存区
+
+2. **git commit**将文件递交给本地仓库，并且也可以提交相应信息
+
+3. **git push**将本地仓库内容推送到远程（云端）仓库
+
 ## 一.什么是版本控制
 
 软件工程中的软件版本都应该不断进化，但是有时候版本会发生回滚，这就需要版本管理工具。多人开发必须要版本管理工具。
 
-**主流的版本控制工具又以下几种**
+主流的版本控制工具又以下几种：
 
 - Git
 - SVN
@@ -18,7 +28,7 @@
 
 必须联网，需要从中央服务器获取代码，修改后再提交到中央服务器
 
--  分布式版本控制（每个人都拥有全部的版本代码，包括中央服务器）Git
+- 分布式版本控制（每个人都拥有全部的版本代码，包括中央服务器）Git
 
 ## 二.Git的历史
 
@@ -80,8 +90,6 @@ git config --global user.email "useremail" #用户邮箱
 
 Git在本地有3个工作区域：**工作目录、暂存区、仓库区**，再加上远程的git仓库（Remote Directory）就可以分为四个工作区域。四个工作区域转换关系如下：
 
-
-
 - 工作区域：平时存放项目代码的地方
 
 - 暂存区：用于临时存放你的改动，他只是一个文件
@@ -125,39 +133,35 @@ $ git clone [url]
 ### 1.将对应文件添加到暂存区
 
 ~~~ shell
-$ git add [对应路径]
+git add [对应路径]
 ~~~
 
 ### 2.显示工作目录和暂存区的状态
 
 ~~~ shell
-$ git status
+git status
 ~~~
 
 ### 3.提交暂存区中的修改
 
 ~~~ shell
-$ git commit [-m]#加入把本次提交的记录说明
+git commit [-m]#加入把本次提交的记录说明
 ~~~
 
 ### 4. 显示日志
 
 ~~~ shell
-$ git log
+git log
 ~~~
 
-
-
 ## 七.Github的使用
-
-
 
 ### 1.clone项目（）fork
 
 首先找到需要fork的项目，点击clone。再需要下载该项目的文件夹下右键——Git Bash here，再命令行界面输入命令
 
 ~~~ shell
-$ git clone [github中的clone地址]
+git clone [github中的clone地址]
 ~~~
 
 ### 2.绑定远程仓库
@@ -165,6 +169,5 @@ $ git clone [github中的clone地址]
 首先在Github中创建一个仓库，获得该仓库连接。再在本地项目文件夹中右键——Git Bash Here，输入命令
 
 ~~~ shell
-$ git remote add origin [github中的远程仓库地址]
+git remote add origin [github中的远程仓库地址]
 ~~~
-

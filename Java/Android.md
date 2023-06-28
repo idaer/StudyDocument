@@ -2,6 +2,8 @@
 
 ## 一.对于Hello World项目结构说明
 
+建议图床
+
 ![image-20220313191157226](C:\Users\idear\AppData\Roaming\Typora\typora-user-images\image-20220313191157226.png)
 
 ### 1.Project目录
@@ -22,8 +24,6 @@
 | src         | 存放项目的源码和资源      |
 
 ## 二.控件
-
-### 1.TextView
 
 显示文本信息
 
