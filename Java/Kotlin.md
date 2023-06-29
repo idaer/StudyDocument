@@ -150,10 +150,60 @@ fun main(args: Array<String>) {
 
 #### 布尔
 
-Boolean 类型表示可以有 true 与 false 两个值的布尔对象
+Boolean 类型表示可以有 true 与 false 两个值的布尔对象。Boolean 的可空版 Boolean? 还有 null 值。
+
+布尔值的内置运算有：
+
+* `&&` 逻辑与
+* `||` 逻辑或
+* `!` 逻辑非
 
 #### 字符
 
+字符用 Char 类型表示。 字符字面值用单引号括起来: '1' 。编码其他字符要用 Unicode 转义序列语法： `\uFF00` 。
+
+##### 转义字符
+
+* `\t`——制表符
+* `\b`——退格符
+* `\n`——换行(LF)
+* `\r`——回车(CR)
+* `\'`——\'
+* `\"`——\"
+* `\\`——\\
+* `\$`——\$
+
+```Kotlin
+fun main() {
+    //sampleStart
+    val aChar: Char = 'a'
+    println(aChar)
+    println('\n') // 输出一个额外的换行符
+    println('\uFF00')
+    //sampleEnd
+}
+```
+
 #### 字符串
+
+Kotlin 中字符串用 String 类型表示。 通常，字符串值是双引号（ " ）中的字符序列
+
+```Kotlin
+val str="123 asd"
+```
+
+字符串的元素——字符可以使用索引运算符访问: s[i] 。 可以使用 for 循环遍历这些字
+符：
+
+```Kotlin
+fun main() {
+    val str = "abcd"
+    //sampleStart
+    for (c in str) {
+        println(c)
+    }
+    //sampleEnd
+}
+```
 
 #### 数组
