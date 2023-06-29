@@ -23,3 +23,6 @@
 
 1. 更新了React&React Native（为空，不知道以后会不会用）
 2. 更新了Kotlin相关内容（新项目会采用）
+3. 完善了Markdown语法脚注部分
+4. 新建了React&React Native部分
+5. 完善了项目需求分析（一点点）
