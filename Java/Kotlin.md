@@ -207,3 +207,26 @@ fun main() {
 ```
 
 #### 数组
+
+数组在 Kotlin 中使用 Array 类来表示。它定义了 `get()` 与 `set ()` 函数（按照运算符重载约定这会转变为 [] ）与 size 属性及其他有用的成员函数：
+
+```Kotlin
+//Array源代码
+class Array<T> private constructor() {
+    val size: Int
+    operator fun get(index: Int): T
+    operator fun set(index: Int, value: T): Unit
+    operator fun iterator(): Iterator<T>
+    // ...
+}
+```
+
+可以使用函数 `arrayOf()` 来创建一个数组并传递元素值给它，这样 arrayOf(1, 2, 3) 创建了 array [1, 2, 3] 。 或者，函数 `arrayOfNulls()` 可以用于创建一个指定大小的、所有元素都为空的数组。
+
+```Kotlin
+fun main() {
+    // 创建一个 Array<String> 初始化为 ["0", "1", "4", "9", "16"]
+    val asc = Array(5) { i -> (i * i).toString() }
+    asc.forEach { println(it) }
+}
+```
