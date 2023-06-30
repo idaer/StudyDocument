@@ -226,7 +226,119 @@ class Array<T> private constructor() {
 ```Kotlin
 fun main() {
     // 创建一个 Array<String> 初始化为 ["0", "1", "4", "9", "16"]
+    //构造函数
     val asc = Array(5) { i -> (i * i).toString() }
+    asc.forEach { println(it) }
+    //创建一个 Array<Int> 初始化为[1,2,3,4]
+    val asc = arrayOf(1,2,3,4)
     asc.forEach { println(it) }
 }
 ```
+
+##### 原生数组
+
+元素以非对象创建的原生类型数组：`ByteArray`、`ShortArray`、`IntArray`等。这些类与 `Array` 并没有继承关系，但是它们有同样的方法属性集。它们也都有相应的工
+厂方法:
+
+```Kotlin
+val x: IntArray = intArrayOf(1, 2, 3)
+x[0] = x[1] + x[2]
+
+// 大小为 5、值为 [0, 0, 0, 0, 0] 的整型数组
+val arr = IntArray(5)
+// 用常量初始化数组中的值的示例
+// 大小为 5、值为 [42, 42, 42, 42, 42] 的整型数组
+val arr = IntArray(5) { 42 }
+// 使用 lambda 表达式初始化数组中的值的示例
+// 大小为 5、值为 [0, 1, 2, 3, 4] 的整型数组（值初始化为其索引值）
+var arr = IntArray(5) { it * 1 }
+```
+
+#### 无符号整型
+
+* `UByte`:无符号 8 比特整数，范围是 0 到 255
+* `UShort`:无符号 16 比特整数，范围是 0 到 65535
+* `UInt`:无符号 32 比特整数，范围是 0 到 2^32 - 1
+* `ULong`:无符号 64 比特整数，范围是 0 到 2^64 - 1
+
+#### 类型检测与类型转换
+
+##### is 与 !is 操作符
+
+使用 is 操作符或其否定形式 !is 在运行时检测对象是否符合给定类型：
+
+```Kotlin
+if (obj is String) {
+    print(obj.length)
+}
+if (obj !is String) { 
+    // 与 !(obj is String) 相同
+    print("Not a String")
+} else {
+    print(obj.length)
+}
+```
+
+### 流程控制
+
+#### 条件
+
+#### if、else、else if
+
+```Kotlin
+if (a>b) {
+    println("a>b")
+}
+else if (a==b) {
+    println("a==b")
+}
+else {
+    println("a<b")
+}
+```
+
+#### When
+
+相当于Java中的Switch语句，将它的参数与所有的分支条件顺序比较，直到某个分支满足条件。
+
+```Kotlin
+when(n) {
+    //如果n==1
+    1-> {
+        //执行
+    }
+    //如果n==2
+    2-> {
+        //执行
+    }
+    //如果n!=1&&n!=2
+    else-> {
+        //执行
+    }
+}
+```
+
+when 既可以作为表达式使用也可以作为语句使用。
+
+```Kotlin
+val condition:Int= when(n) {
+    //如果n==1
+    1-> {
+        //执行
+    }
+    //如果n==2
+    2-> {
+        //执行
+    }
+    //如果n!=1&&n!=2
+    else-> {
+        //执行
+    }
+}
+```
+
+#### 循环
+
+#### 返回与跳转
+
+#### 异常
