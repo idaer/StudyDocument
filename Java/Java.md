@@ -188,6 +188,7 @@ HashSet 是基于 HashMap 实现的，HashSet的值存放于HashMap的key上，H
 * 支持了List.of(), Set.of(), Map.of()的方式初始化不可变集合，省略了大量代码，语法糖
 * 改进的Stream API，比如ofNullable(),dropWhile(),takeWhile()等
 * 接口中的private方法不会被外部实现
+* try-with-resources语法自动释放资源
 
 ### Java10
 
