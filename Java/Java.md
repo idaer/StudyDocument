@@ -171,6 +171,208 @@ HashSet 是基于 HashMap 实现的，HashSet的值存放于HashMap的key上，H
 * 实现`Runnable`接口
 * 实现`Callable`接口（不常用）
 
+### 深浅拷贝（克隆）详解
+
+克隆是指创建一个对象的副本，使得新创建的对象在内容上与原始对象相同。在编程中，克隆是常用的技术之一，它具有以下几个重要用途和优势：
+
+1. **复制对象**：使用克隆可以创建一个与原始对象相同的新对象，包括对象的属性和状态。这样可以在不影响原始对象的情况下，对新对象进行修改、操作、传递等。这在某些场景下非常有用，可以避免重新创建和初始化一个对象。
+2. **隔离性与保护**：通过克隆，可以创建一个独立于原始对象的副本。这样，修改克隆对象时，不会影响到原始对象，从而实现了对象之间的隔离性。这对于多线程环境下的并发操作或者保护重要数据具有重要意义。
+3. **性能优化**：有时候，通过克隆对象可以提高程序的性能。在某些场景下，对象的创建和初始化过程可能较为耗时，如果需要多次使用这个对象，通过克隆原始对象可以避免重复的创建和初始化过程，从而提高程序的执行效率。
+4. **原型模式**：克隆在设计模式中有一个重要的角色，即原型模式。原型模式通过克隆来创建对象的实例，而不是使用传统的构造函数。这样可以提供更灵活的对象创建方式，并且避免了频繁的子类化。
+
+#### 浅拷贝
+
+* 浅拷贝指在克隆操作中，只复制对象本身以及对象内部的基本数据类型的属性，而不复制对象内部的引用类型的属性。
+* 浅拷贝仅仅创建了一个新对象，该对象与原始对象共享对同一引用类型属性的访问。如果原始对象的引用类型属性被修改，浅拷贝的对象也会受到影响。
+* 在浅拷贝中，新对象和原始对象指向同一块内存区域，因此对其中一个对象进行修改可能会影响到另一个对象。
+
+浅拷贝**只拷贝最表面的对象**，如果对象内引用了其他对象的话，仍然是使用相同的引用地址。
+
+浅拷贝通过实现了`Cloneable`接口的`clone()`方法
+
+```java
+//实现Cloneable接口
+class Person implements Cloneable {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    //实现clone方法
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Person person1 = new Person("Alice", 25);
+        try {
+            // 浅拷贝
+            Person person2 = (Person) person1.clone();
+
+            System.out.println(person1.getName() + " " + person1.getAge()); // Alice 25
+            System.out.println(person2.getName() + " " + person2.getAge()); // Alice 25
+
+            person2.setName("Bob");
+            person2.setAge(30);
+
+            System.out.println(person1.getName() + " " + person1.getAge()); // Alice 25
+            System.out.println(person2.getName() + " " + person2.getAge()); // Bob 30
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+
+
+#### 深拷贝
+
+* 深拷贝指在克隆操作中，除了复制对象本身以及对象内部的基本数据类型的属性外，还要递归地复制对象内部的引用类型的属性。即深度克隆了所有引用类型的属性。
+* 深拷贝创建了一个完全独立的新对象，该对象与原始对象没有任何关联，对新对象和原始对象的修改互不影响。
+* 在深拷贝中，新对象和原始对象分别对应不同的内存区域，它们之间不存在引用关系，因此修改其中一个对象不会影响到另一个对象。
+
+深拷贝会一直递归复制对应的对象，其对象内部的引用对象也会被复制。
+
+深拷贝是通过序列化和反序列化来进行复制的。
+
+```java
+import java.io.*;
+
+
+//实现Serializable接口
+class Address implements Serializable {
+    private String city;
+    private String street;
+
+    public Address(String city, String street) {
+        this.city = city;
+        this.street = street;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+}
+//实现Serializable接口
+class Person implements Serializable {
+    private String name;
+    private int age;
+   	//内部引用了其他对象
+    private Address address;
+
+    public Person(String name, int age, Address address) {
+        this.name = name;
+        this.age = age;
+        this.address = address;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Address address = new Address("City", "Street");
+        Person person1 = new Person("Alice", 25, address);
+
+        // 深拷贝！！！
+        Person person2 = deepCopy(person1);
+
+        System.out.println(person1.getName() + " " + person1.getAge() + " " + person1.getAddress().getCity()); // Alice 25 City
+        System.out.println(person2.getName() + " " + person2.getAge() + " " + person2.getAddress().getCity()); // Alice 25 City
+
+        person2.setName("Bob");
+        person2.setAge(30);
+        person2.getAddress().setCity("New City");
+
+        System.out.println(person1.getName() + " " + person1.getAge() + " " + person1.getAddress().getCity()); // Alice 25 City
+        System.out.println(person2.getName() + " " + person2.getAge() + " " + person2.getAddress().getCity()); // Bob 30 New City
+    }
+
+    
+    //深拷贝具体实现方法
+    public static <T extends Serializable> T deepCopy(T object) {
+        try {
+            //创建字节输出流
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            //以字节输出流创建对象输出流？？
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+            //写入到内存中
+            objectOutputStream.writeObject(object);
+            objectOutputStream.flush();
+            //创建对象输入流
+            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+            //从内存中读取
+            ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
+            return (T) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+}
+```
+
+在上述示例中，我们创建了一个 Address 类和一个 Person 类，它们都实现了` Serializable` 接口。通过序列化和反序列化操作，我们可以实现深拷贝。在 `deepCopy()` 方法中，我们使用字节流将对象写入到内存中，并从内存中读取出来，从而得到一个新的独立对象。通过调用 `deepCopy()` 方法，可以得到一个新的对象 `person2`，它与原始对象 `person1` 完全独立。在修改 `person2` 的属性时，不会影响到 `person1`。 值得注意的是，要实现深拷贝，**所有相关的类都需要实现 Serializable 接口**。
+
+
+
 ## 各版本语言特性·
 
 ### Java8

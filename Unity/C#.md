@@ -538,3 +538,85 @@ namespace runoob
 }
 ```
 
+### 索引器
+
+**索引器（Indexer）** 允许一个对象可以像数组一样使用下标的方式来访问。
+
+当您为类定义一个索引器时，该类的行为就会像一个 **虚拟数组（virtual array）** 一样。您可以使用数组访问运算符 **[ ]** 来访问该类的的成员。
+
+```c#
+//索引器定义
+using System;
+namespace IndexerApplication
+{
+   class IndexedNames
+   {
+      private string[] namelist = new string[size];
+      static public int size = 10;
+      public IndexedNames()
+      {
+         for (int i = 0; i < size; i++)
+         namelist[i] = "N. A.";
+      }
+       //定义一维索引器
+      public string this[int index]
+      {
+         get
+         {
+            string tmp;
+
+            if( index >= 0 && index <= size-1 )
+            {
+               tmp = namelist[index];
+            }
+            else
+            {
+               tmp = "";
+            }
+
+            return ( tmp );
+         }
+         set
+         {
+            if( index >= 0 && index <= size-1 )
+            {
+               namelist[index] = value;
+            }
+         }
+      }
+
+       
+//使用索引器
+      static void Main(string[] args)
+      {
+         IndexedNames names = new IndexedNames();
+         names[0] = "Zara";
+         names[1] = "Riz";
+         names[2] = "Nuha";
+         names[3] = "Asif";
+         names[4] = "Davinder";
+         names[5] = "Sunil";
+         names[6] = "Rubic";
+         for ( int i = 0; i < IndexedNames.size; i++ )
+         {
+            Console.WriteLine(names[i]);
+         }
+         Console.ReadKey();
+      }
+   }
+}
+```
+
+索引器（Indexer）可被重载。索引器声明的时候也可带有多个参数，且每个参数可以是不同的类型。没有必要让索引器必须是整型的。C# 允许索引器可以是其他类型，例如，字符串类型。
+
+### 委托
+
+C# 中的委托（Delegate）类似于 C 或 C++ 中函数的指针。**委托（Delegate）** 是存有对某个方法的引用的一种引用类型变量。引用可在运行时被改变。
+
+委托（Delegate）特别用于实现事件和回调方法。所有的委托（Delegate）都派生自 **System.Delegate** 类。
+
+### 事件
+
+### 匿名方法
+
+### 不安全代码
