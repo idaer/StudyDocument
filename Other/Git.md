@@ -198,3 +198,9 @@ git remote add origin [github中的远程仓库地址]
 - chore - 构建过程或辅助工具的变动
 - revert - 回退
 - build - 打包
+
+## merge和rebase的区别
+
+merge是将你在本地产生的commit和线上的commit合并为一条分支，合并时也会产生一条新的commit
+
+而rebase是将你当前分支的 commit 放到公共分支的最后面,所以叫变基。就好像你从公共分支又重新拉出来这个分支一样。
