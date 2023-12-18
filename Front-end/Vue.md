@@ -355,7 +355,7 @@ Vue.createApp(app).mount('#app')
 </script>
 ```
 
-默认computer只有一个返回值的getter，但是也可以手动定义一个初始化属性的setter
+默认computed只有一个返回值的getter，但是也可以手动定义一个初始化属性的setter
 
 ```javascript
 var vm = new Vue({
